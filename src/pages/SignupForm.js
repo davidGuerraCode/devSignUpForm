@@ -9,7 +9,7 @@ const SignupForm = () => {
     <DevSignupForm>
       <Box pt={5}>
         <Header />
-        <FormTabs bg="green.50" />
+        <FormTabs />
       </Box>
     </DevSignupForm>
   );
