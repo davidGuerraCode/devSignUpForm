@@ -7,25 +7,28 @@ import {
   Input,
   Select,
   Flex,
+  Grid,
   Box,
   Textarea,
 } from '@chakra-ui/core';
 
 const PersonalInfo = () => {
   return (
-    <Flex direction={{ sm: 'column', md: 'row' }} px={10}>
-      <FormControl>
-        <Box mt={5}>
+    <FormControl mt={8}>
+      <Grid
+        templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
+        gap={8}>
+        <Box>
           <FormLabel htmlFor="firstname">Nombre</FormLabel>
           <Input id="firstname" placeholder="Jonh" bg="imuko.secondaryGray" />
         </Box>
 
-        <Box mt={5}>
+        <Box>
           <FormLabel htmlFor="lastname">Apellido</FormLabel>
           <Input id="lastname" placeholder="Doe" bg="imuko.secondaryGray" />
         </Box>
 
-        <Box mt={5}>
+        <Box>
           <FormLabel htmlFor="age">Edad</FormLabel>
           <Input
             type="number"
@@ -35,17 +38,17 @@ const PersonalInfo = () => {
           />
         </Box>
 
-        <Box mt={5}>
+        <Box>
           <FormLabel htmlFor="phone">Teléfono</FormLabel>
           <Input
-            type="telephone"
+            type="phone"
             id="phone"
             placeholder="+XX 214 1247896"
             bg="imuko.secondaryGray"
           />
         </Box>
 
-        <Box mt={5}>
+        <Box>
           <FormLabel htmlFor="email">Email</FormLabel>
           <Input
             type="email"
@@ -55,7 +58,7 @@ const PersonalInfo = () => {
           />
         </Box>
 
-        <Box mt={5}>
+        <Box>
           <FormLabel htmlFor="country">País de residencia</FormLabel>
           <Select
             id="country"
@@ -67,7 +70,7 @@ const PersonalInfo = () => {
           </Select>
         </Box>
 
-        <Box mt={5}>
+        <Box>
           <FormLabel htmlFor="departament">Departamento</FormLabel>
           <Select
             id="departament"
@@ -78,7 +81,7 @@ const PersonalInfo = () => {
           </Select>
         </Box>
 
-        <Box mt={5}>
+        <Box>
           <FormLabel>Hablanos de ti</FormLabel>
           <Textarea
             resize="none"
@@ -86,8 +89,8 @@ const PersonalInfo = () => {
             bg="imuko.secondaryGray"
           />
         </Box>
-      </FormControl>
-    </Flex>
+      </Grid>
+    </FormControl>
   );
 };
 

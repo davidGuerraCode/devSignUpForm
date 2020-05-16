@@ -1,32 +1,42 @@
 import React from 'react';
-import { Flex, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/core';
-import { PersonalInfo } from './Forms';
+import {
+  Flex,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Box,
+} from '@chakra-ui/core';
+import { PersonalInfo, Skills, Experience } from './Forms';
 
 const FormTabs = () => {
   return (
     <Flex justify="center">
-      <Tabs size="md" variant="enclosed">
-        <TabPanels>
-          <TabPanel>
-            <PersonalInfo />
-          </TabPanel>
-          <TabPanel>
-            <p>Skills</p>
-          </TabPanel>
-          <TabPanel>
-            <p>Experiencia e Intereses</p>
-          </TabPanel>
-        </TabPanels>
-        <TabList my={10}>
-          <Tab _selected={{ color: 'white', bg: 'imuko.orange' }}>
-            Información Personal
-          </Tab>
-          <Tab _selected={{ color: 'white', bg: 'imuko.orange' }}>Skills</Tab>
-          <Tab _selected={{ color: 'white', bg: 'imuko.orange' }}>
-            Experiencia e Intereses
-          </Tab>
-        </TabList>
-      </Tabs>
+      <Box>
+        <Tabs size="md" variant="enclosed" defaultIndex={1}>
+          <TabPanels>
+            <TabPanel>
+              <PersonalInfo />
+            </TabPanel>
+            <TabPanel>
+              <Skills />
+            </TabPanel>
+            <TabPanel>
+              <Experience />
+            </TabPanel>
+          </TabPanels>
+          <TabList my={10} textAlign="center">
+            <Tab _selected={{ color: 'white', bg: 'imuko.orange' }}>
+              Información Personal
+            </Tab>
+            <Tab _selected={{ color: 'white', bg: 'imuko.orange' }}>Skills</Tab>
+            <Tab _selected={{ color: 'white', bg: 'imuko.orange' }}>
+              Experiencia e Intereses
+            </Tab>
+          </TabList>
+        </Tabs>
+      </Box>
     </Flex>
   );
 };
