@@ -13,7 +13,7 @@ import {
 
 const PersonalInfo = () => {
   return (
-    <Flex direction="column" px={10}>
+    <Flex direction={{ sm: 'column', md: 'row' }} px={10}>
       <FormControl>
         <Box mt={5}>
           <FormLabel htmlFor="firstname">Nombre</FormLabel>

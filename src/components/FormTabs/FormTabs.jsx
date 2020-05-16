@@ -18,11 +18,11 @@ const FormTabs = () => {
           </TabPanel>
         </TabPanels>
         <TabList my={10}>
-          <Tab _selected={{ color: 'white', bg: 'imuko.blue' }}>
+          <Tab _selected={{ color: 'white', bg: 'imuko.orange' }}>
             Información Personal
           </Tab>
-          <Tab _selected={{ color: 'white', bg: 'imuko.blue' }}>Skills</Tab>
-          <Tab _selected={{ color: 'white', bg: 'imuko.blue' }}>
+          <Tab _selected={{ color: 'white', bg: 'imuko.orange' }}>Skills</Tab>
+          <Tab _selected={{ color: 'white', bg: 'imuko.orange' }}>
             Experiencia e Intereses
           </Tab>
         </TabList>
