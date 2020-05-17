@@ -2,11 +2,11 @@ import React from 'react';
 import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
+  // FormErrorMessage,
+  // FormHelperText,
   Input,
   Select,
-  Flex,
+  // Flex,
   Grid,
   Box,
   Textarea,
@@ -14,7 +14,7 @@ import {
 
 const PersonalInfo = () => {
   return (
-    <FormControl mt={8}>
+    <FormControl m={8}>
       <Grid
         templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
         gap={8}>

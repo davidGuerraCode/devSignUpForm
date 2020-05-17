@@ -2,11 +2,11 @@ import React from 'react';
 import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
+  // FormErrorMessage,
+  // FormHelperText,
   Input,
   Select,
-  Flex,
+  // Flex,
   Grid,
   Box,
   Textarea,
@@ -17,7 +17,7 @@ import CustomRadioButton from './CustomRadioButton/CustomRadioButton';
 import {
   DiJavascript1,
   DiNodejsSmall,
-  DiAws,
+  // DiAws,
   DiBitbucket,
   DiTerminal,
 } from 'react-icons/di';

@@ -7,7 +7,7 @@ import { Header } from '../components/Header';
 const SignupForm = () => {
   return (
     <DevSignupForm>
-      <Box pt={5}>
+      <Box p={5}>
         <Header />
         <FormTabs />
       </Box>
