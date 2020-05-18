@@ -1,11 +1,11 @@
 import React from 'react';
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Box } from '@chakra-ui/core';
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/core';
 import { PersonalInfo, Skills, Experience } from './Forms';
 
 const FormTabs = () => {
   return (
-    <Tabs size="md" variant="enclosed" order="2" justifyContent="center">
-      <TabList my={10} justifyContent="center" order="1">
+    <Tabs size="md" variant="enclosed">
+      <TabList my={10} px={5} justifyContent="center">
         <Tab _selected={{ color: 'white', bg: 'imuko.orange' }}>
           Información Personal
         </Tab>
