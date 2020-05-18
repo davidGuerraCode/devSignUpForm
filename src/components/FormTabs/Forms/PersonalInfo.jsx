@@ -15,9 +15,7 @@ import {
 const PersonalInfo = () => {
   return (
     <FormControl m={8}>
-      <Grid
-        templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
-        gap={8}>
+      <Grid templateColumns={{ md: 'repeat(2, 1fr)' }} gap={8}>
         <Box>
           <FormLabel htmlFor="firstname">Nombre</FormLabel>
           <Input id="firstname" placeholder="Jonh" bg="imuko.secondaryGray" />
@@ -81,7 +79,7 @@ const PersonalInfo = () => {
           </Select>
         </Box>
 
-        <Box>
+        <Box gridColumn={{ md: 'span 2' }}>
           <FormLabel>Hablanos de ti</FormLabel>
           <Textarea
             resize="none"

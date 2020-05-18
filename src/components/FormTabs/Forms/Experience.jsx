@@ -14,52 +14,42 @@ import {
   RadioButtonGroup,
 } from '@chakra-ui/core';
 import CustomRadioButton from './CustomRadioButton/CustomRadioButton';
-import {
-  DiJavascript1,
-  DiNodejsSmall,
-  // DiAws,
-  DiBitbucket,
-  DiTerminal,
-} from 'react-icons/di';
 
 const Experience = () => {
   return (
     <FormControl m={8}>
-      <Grid gap={8}>
+      <Grid templateColumns={{ md: 'repeat(2, 1fr)' }} gap={8}>
         <Box>
           <FormLabel>Estatus laboral</FormLabel>
-          <RadioButtonGroup isInline>
-            <Grid
-              templateColumns={{ sm: 'repeat(2, 1fr)', md: 'repeat(1, 1fr)' }}
-              autoFlow={{ sm: 'row', md: 'column' }}
-              gap={4}>
-              <CustomRadioButton leftIcon={DiJavascript1} value="working">
-                Trabajando en empresa
-              </CustomRadioButton>
-              <CustomRadioButton leftIcon={DiNodejsSmall} value="searching">
-                Buscando
-              </CustomRadioButton>
-              <CustomRadioButton leftIcon={DiTerminal} value="freelancer">
-                Soy freelancer
-              </CustomRadioButton>
-              <CustomRadioButton leftIcon={DiBitbucket} value="available">
-                Disponible
-              </CustomRadioButton>
-            </Grid>
+          <RadioButtonGroup className="radioBtnsGroup">
+            {/* <Grid
+              templateColumns={{ sm: 'repeat(2, 1fr)' }}
+              autoFlow={{ md: 'row' }}
+              gap={4}> */}
+            <CustomRadioButton
+              fontSize={['13px', null, null, '1rem']}
+              value="working">
+              Trabajando en empresa
+            </CustomRadioButton>
+            <CustomRadioButton value="searching">Buscando</CustomRadioButton>
+            <CustomRadioButton value="freelancer">
+              Soy freelancer
+            </CustomRadioButton>
+            <CustomRadioButton value="available">Disponible</CustomRadioButton>
+            {/* </Grid> */}
           </RadioButtonGroup>
         </Box>
         <Box>
           <FormLabel>Modalidad</FormLabel>
-          <RadioButtonGroup isInline>
-            <CustomRadioButton leftIcon={DiJavascript1} value="remote">
-              Remoto
-            </CustomRadioButton>
-            <CustomRadioButton leftIcon={DiNodejsSmall} value="office">
-              Oficina
-            </CustomRadioButton>
-            <CustomRadioButton leftIcon={DiTerminal} value="anyway">
-              Cualquiera
-            </CustomRadioButton>
+          <RadioButtonGroup className="radioBtnsGroup">
+            {/* <Grid
+              templateColumns={{ sm: 'repeat(2, 1fr)' }}
+              autoFlow={{ md: 'row' }}
+              gap={4}> */}
+            <CustomRadioButton value="remote">Remoto</CustomRadioButton>
+            <CustomRadioButton value="office">Oficina</CustomRadioButton>
+            <CustomRadioButton value="anyway">Cualquiera</CustomRadioButton>
+            {/* </Grid> */}
           </RadioButtonGroup>
         </Box>
 
@@ -97,21 +87,17 @@ const Experience = () => {
 
         <Box>
           <FormLabel>¿Disponibilidad?</FormLabel>
-          <RadioButtonGroup isInline>
-            <Grid
-              templateColumns={{ sm: 'repeat(2, 1fr)', md: 'repeat(1, 1fr)' }}
-              autoFlow={{ sm: 'row', md: 'column' }}
-              gap={4}>
-              <CustomRadioButton leftIcon={DiJavascript1} value="byHrs">
-                Por horas
-              </CustomRadioButton>
-              <CustomRadioButton leftIcon={DiNodejsSmall} value="halfTime">
-                Medio tiempo
-              </CustomRadioButton>
-              <CustomRadioButton leftIcon={DiTerminal} value="full time">
-                Tiempo completo
-              </CustomRadioButton>
-            </Grid>
+          <RadioButtonGroup className="radioBtnsGroup">
+            {/* <Grid
+              templateColumns={{ sm: 'repeat(2, 1fr)' }}
+              autoFlow={{ md: 'row' }}
+              gap={4}> */}
+            <CustomRadioButton value="byHrs">Por horas</CustomRadioButton>
+            <CustomRadioButton value="halfTime">Medio tiempo</CustomRadioButton>
+            <CustomRadioButton value="full time">
+              Tiempo completo
+            </CustomRadioButton>
+            {/* </Grid> */}
           </RadioButtonGroup>
         </Box>
 
@@ -134,7 +120,7 @@ const Experience = () => {
           </Select>
         </Box>
 
-        <Box>
+        <Box gridColumn={{ md: 'span 2' }}>
           <FormLabel>Hablanos de expreciencia</FormLabel>
           <Textarea
             resize="none"

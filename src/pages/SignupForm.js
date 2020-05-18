@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@chakra-ui/core';
+import { Box, Flex } from '@chakra-ui/core';
 import DevSignupForm from './DevSignupForm';
 import { FormTabs } from '../components/FormTabs';
 import { Header } from '../components/Header';
@@ -7,10 +7,12 @@ import { Header } from '../components/Header';
 const SignupForm = () => {
   return (
     <DevSignupForm>
-      <Box p={5}>
-        <Header />
-        <FormTabs />
-      </Box>
+      <Flex justifyContent="center">
+        <Flex direction="column">
+          <Header />
+          <FormTabs />
+        </Flex>
+      </Flex>
     </DevSignupForm>
   );
 };

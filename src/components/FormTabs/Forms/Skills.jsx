@@ -9,7 +9,6 @@ import {
   // Flex,
   Grid,
   Box,
-  Textarea,
   Switch,
   RadioButtonGroup,
 } from '@chakra-ui/core';
@@ -24,10 +23,10 @@ import {
 
 const Skills = () => {
   return (
-    <FormControl mt={8}>
-      <Grid gap={8}>
+    <FormControl m={8}>
+      <Grid templateColumns={{ md: 'repeat(2, 1fr)' }} gap={8}>
         <Box>
-          <FormLabel htmlFor="educationLevel">Nivel de Educaciòn</FormLabel>
+          <FormLabel htmlFor="educationLevel">Nivel de formación</FormLabel>
           <Select
             id="educationLevel"
             placeholder="Seleccione..."
@@ -63,24 +62,24 @@ const Skills = () => {
 
         <Box>
           <FormLabel>Eres...</FormLabel>
-          <RadioButtonGroup isInline>
-            <Grid
-              templateColumns={{ sm: 'repeat(2, 1fr)', md: 'repeat(1, 1fr)' }}
-              gap={4}
-              autoFlow={{ sm: 'row', md: 'column' }}>
-              <CustomRadioButton leftIcon={DiJavascript1} value="frontend">
-                Frontend
-              </CustomRadioButton>
-              <CustomRadioButton leftIcon={DiNodejsSmall} value="backend">
-                Backend
-              </CustomRadioButton>
-              <CustomRadioButton leftIcon={DiTerminal} value="fullstack">
-                Fullstack
-              </CustomRadioButton>
-              <CustomRadioButton leftIcon={DiBitbucket} value="devOps">
-                DevOps
-              </CustomRadioButton>
-            </Grid>
+          <RadioButtonGroup className="radioBtnsGroup">
+            {/* <Grid
+              templateColumns={{ sm: 'repeat(2, 1fr)' }}
+              autoFlow={{ md: 'row' }}
+              gap={4}> */}
+            <CustomRadioButton leftIcon={DiJavascript1} value="frontend">
+              Frontend
+            </CustomRadioButton>
+            <CustomRadioButton leftIcon={DiNodejsSmall} value="backend">
+              Backend
+            </CustomRadioButton>
+            <CustomRadioButton leftIcon={DiTerminal} value="fullstack">
+              Fullstack
+            </CustomRadioButton>
+            <CustomRadioButton leftIcon={DiBitbucket} value="devOps">
+              DevOps
+            </CustomRadioButton>
+            {/* </Grid> */}
           </RadioButtonGroup>
         </Box>
 
@@ -115,15 +114,6 @@ const Skills = () => {
             <option value="profesional">Sprint</option>
             <option value="empirico">Django</option>
           </Select>
-        </Box>
-
-        <Box width="1fr">
-          <FormLabel>Hablanos de ti</FormLabel>
-          <Textarea
-            resize="none"
-            placeholder="Hablanos de ti"
-            bg="imuko.secondaryGray"
-          />
         </Box>
       </Grid>
     </FormControl>
