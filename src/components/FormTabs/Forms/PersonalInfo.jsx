@@ -1,18 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
+import AsyncSelect from './AsyncSelect';
 import {
   FormControl,
   FormLabel,
   // FormErrorMessage,
   // FormHelperText,
   Input,
-  Select,
-  // Flex,
   Grid,
   Box,
   Textarea,
 } from '@chakra-ui/core';
 
 const PersonalInfo = () => {
+  const [departmentsUri, setDepartmentsUri] = useState(null);
+  const [state, setState] = useState({});
+
+  const countryChangeHandler = (value, name) => {
+    setDepartmentsUri(
+      `${process.env.REACT_APP_BACKEND_API_URL}/departments/${value}`
+    );
+    setState((current) => ({
+      ...current,
+      [name]: value,
+    }));
+  };
+
+  const departmentsChangeHandler = (value, name) => {
+    setState((current) => ({
+      ...current,
+      [name]: value,
+    }));
+  };
+
+  console.log('{X}', state);
+
   return (
     <FormControl m={8}>
       <Grid templateColumns={{ md: 'repeat(2, 1fr)' }} gap={8}>
@@ -57,26 +78,23 @@ const PersonalInfo = () => {
         </Box>
 
         <Box>
-          <FormLabel htmlFor="country">País de residencia</FormLabel>
-          <Select
+          <AsyncSelect
+            url={`${process.env.REACT_APP_BACKEND_API_URL}/country`}
+            onSelect={countryChangeHandler}
+            label="País de residencia"
+            canShow
             id="country"
-            defaultValue="Venezuela"
-            bg="imuko.secondaryGray">
-            <option value="Venezuela">Venezuela</option>
-            <option value="Colombia">Colombia</option>
-            <option value="Argentina">Argentina</option>
-          </Select>
+          />
         </Box>
 
         <Box>
-          <FormLabel htmlFor="departament">Departamento</FormLabel>
-          <Select
-            id="departament"
-            defaultValue="Lorem"
-            bg="imuko.secondaryGray">
-            <option value="Lorem">Lorem</option>
-            <option value="Lorem">Lorem</option>
-          </Select>
+          <AsyncSelect
+            url={departmentsUri}
+            canShow={departmentsUri}
+            id="department"
+            onSelect={departmentsChangeHandler}
+            label="Departamento"
+          />
         </Box>
 
         <Box gridColumn={{ md: 'span 2' }}>
