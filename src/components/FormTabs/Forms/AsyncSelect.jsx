@@ -7,7 +7,7 @@ const AsyncSelect = ({ url, onSelect, canShow, label, id }) => {
 
   return (
     <>
-      <FormLabel htmlFor="country">{label}</FormLabel>
+      <FormLabel htmlFor={id}>{label}</FormLabel>
       <Select
         id={id}
         bg="imuko.secondaryGray"

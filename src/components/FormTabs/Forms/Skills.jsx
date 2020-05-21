@@ -1,4 +1,5 @@
 import React from 'react';
+import AsyncSelect from './AsyncSelect';
 import {
   FormControl,
   FormLabel,
@@ -6,7 +7,6 @@ import {
   // FormHelperText,
   Input,
   Select,
-  // Flex,
   Grid,
   Box,
   Switch,
@@ -63,10 +63,6 @@ const Skills = () => {
         <Box>
           <FormLabel>Eres...</FormLabel>
           <RadioButtonGroup className="radioBtnsGroup">
-            {/* <Grid
-              templateColumns={{ sm: 'repeat(2, 1fr)' }}
-              autoFlow={{ md: 'row' }}
-              gap={4}> */}
             <CustomRadioButton leftIcon={DiJavascript1} value="frontend">
               Frontend
             </CustomRadioButton>
@@ -79,21 +75,16 @@ const Skills = () => {
             <CustomRadioButton leftIcon={DiBitbucket} value="devOps">
               DevOps
             </CustomRadioButton>
-            {/* </Grid> */}
           </RadioButtonGroup>
         </Box>
 
         <Box>
-          <FormLabel htmlFor="lenguages">¿Que lenguajes dominas?</FormLabel>
-          <Select
+          <AsyncSelect
+            canShow
+            label="¿Que lenguajes dominas?"
+            url={`${process.env.REACT_APP_BACKEND_API_URL}/lenguage`}
             id="lenguages"
-            placeholder="Seleccione..."
-            bg="imuko.secondaryGray">
-            <option value="tecnico">Javascript</option>
-            <option value="tecnologo">NodeJso</option>
-            <option value="profesional">Java</option>
-            <option value="empirico">Go</option>
-          </Select>
+          />
         </Box>
 
         <Box>
@@ -114,6 +105,15 @@ const Skills = () => {
             <option value="profesional">Sprint</option>
             <option value="empirico">Django</option>
           </Select>
+        </Box>
+
+        <Box>
+          <FormLabel htmlFor="otherFrameworks">Otros Frameworks</FormLabel>
+          <Input
+            id="otherFrameworks"
+            placeholder="Flask"
+            bg="imuko.secondaryGray"
+          />
         </Box>
       </Grid>
     </FormControl>

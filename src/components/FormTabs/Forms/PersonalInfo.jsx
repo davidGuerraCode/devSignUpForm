@@ -32,8 +32,6 @@ const PersonalInfo = () => {
     }));
   };
 
-  console.log('{X}', state);
-
   return (
     <FormControl m={8}>
       <Grid templateColumns={{ md: 'repeat(2, 1fr)' }} gap={8}>
