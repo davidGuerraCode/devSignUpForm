@@ -22,10 +22,6 @@ const Experience = () => {
         <Box>
           <FormLabel>Estatus laboral</FormLabel>
           <RadioButtonGroup className="radioBtnsGroup">
-            {/* <Grid
-              templateColumns={{ sm: 'repeat(2, 1fr)' }}
-              autoFlow={{ md: 'row' }}
-              gap={4}> */}
             <CustomRadioButton
               fontSize={['13px', null, null, '1rem']}
               value="working">
@@ -36,20 +32,14 @@ const Experience = () => {
               Soy freelancer
             </CustomRadioButton>
             <CustomRadioButton value="available">Disponible</CustomRadioButton>
-            {/* </Grid> */}
           </RadioButtonGroup>
         </Box>
         <Box>
           <FormLabel>Modalidad</FormLabel>
           <RadioButtonGroup className="radioBtnsGroup">
-            {/* <Grid
-              templateColumns={{ sm: 'repeat(2, 1fr)' }}
-              autoFlow={{ md: 'row' }}
-              gap={4}> */}
             <CustomRadioButton value="remote">Remoto</CustomRadioButton>
             <CustomRadioButton value="office">Oficina</CustomRadioButton>
             <CustomRadioButton value="anyway">Cualquiera</CustomRadioButton>
-            {/* </Grid> */}
           </RadioButtonGroup>
         </Box>
 
@@ -88,16 +78,11 @@ const Experience = () => {
         <Box>
           <FormLabel>¿Disponibilidad?</FormLabel>
           <RadioButtonGroup className="radioBtnsGroup">
-            {/* <Grid
-              templateColumns={{ sm: 'repeat(2, 1fr)' }}
-              autoFlow={{ md: 'row' }}
-              gap={4}> */}
             <CustomRadioButton value="byHrs">Por horas</CustomRadioButton>
             <CustomRadioButton value="halfTime">Medio tiempo</CustomRadioButton>
             <CustomRadioButton value="full time">
               Tiempo completo
             </CustomRadioButton>
-            {/* </Grid> */}
           </RadioButtonGroup>
         </Box>
 

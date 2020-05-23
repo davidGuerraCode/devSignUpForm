@@ -9,6 +9,10 @@ import {
   Select,
   Grid,
   Box,
+  Tag,
+  TagLabel,
+  TagCloseButton,
+  Stack,
   Switch,
   RadioButtonGroup,
 } from '@chakra-ui/core';
@@ -22,6 +26,17 @@ import {
 } from 'react-icons/di';
 
 const Skills = () => {
+  const [lenguagesTag, setLenguagesTag] = React.useState([]);
+
+  const onSelectHandler = (value, id) => {
+    setLenguagesTag((current) => [...current, value]);
+  };
+
+  const onCloseTagHandler = (lenguage) => {
+    setLenguagesTag((current) => current.filter((item) => item !== lenguage));
+  };
+  console.log('TagsState', lenguagesTag);
+
   return (
     <FormControl m={8}>
       <Grid templateColumns={{ md: 'repeat(2, 1fr)' }} gap={8}>
@@ -82,9 +97,23 @@ const Skills = () => {
           <AsyncSelect
             canShow
             label="¿Que lenguajes dominas?"
+            onSelect={onSelectHandler}
             url={`${process.env.REACT_APP_BACKEND_API_URL}/lenguage`}
             id="lenguages"
           />
+          <Stack isInline justifyContent="center" mt={5}>
+            {lenguagesTag.map((lenguage, idx) => (
+              <Tag
+                key={idx}
+                variant="solid"
+                variantColor="orange"
+                rounded="full"
+                size="sm">
+                <TagLabel>{lenguage}</TagLabel>
+                <TagCloseButton onClick={() => onCloseTagHandler(lenguage)} />
+              </Tag>
+            ))}
+          </Stack>
         </Box>
 
         <Box>

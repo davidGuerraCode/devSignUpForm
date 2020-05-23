@@ -13,8 +13,6 @@ import { PersonalInfo, Skills, Experience } from './Forms';
 const FormTabs = () => {
   const [tabIndex, setTabIndex] = useState(0);
 
-  console.log('index', tabIndex);
-
   return (
     <>
       <Tabs
