@@ -20,7 +20,7 @@ const Experience = () => {
     <FormControl m={8}>
       <Grid templateColumns={{ md: 'repeat(2, 1fr)' }} gap={8}>
         <Box>
-          <FormLabel>Estatus laboral</FormLabel>
+          <FormLabel className="required">Estatus laboral</FormLabel>
           <RadioButtonGroup className="radioBtnsGroup">
             <CustomRadioButton
               fontSize={['13px', null, null, '1rem']}
@@ -35,7 +35,7 @@ const Experience = () => {
           </RadioButtonGroup>
         </Box>
         <Box>
-          <FormLabel>Modalidad</FormLabel>
+          <FormLabel className="required">Modalidad</FormLabel>
           <RadioButtonGroup className="radioBtnsGroup">
             <CustomRadioButton value="remote">Remoto</CustomRadioButton>
             <CustomRadioButton value="office">Oficina</CustomRadioButton>
@@ -44,7 +44,9 @@ const Experience = () => {
         </Box>
 
         <Box>
-          <FormLabel htmlFor="salary">Aspiración Salarial</FormLabel>
+          <FormLabel htmlFor="salary" className="required">
+            Aspiración Salarial
+          </FormLabel>
           <Select
             id="salary"
             placeholder="Seleccione..."
@@ -76,7 +78,7 @@ const Experience = () => {
         </Box>
 
         <Box>
-          <FormLabel>¿Disponibilidad?</FormLabel>
+          <FormLabel className="required">¿Disponibilidad?</FormLabel>
           <RadioButtonGroup className="radioBtnsGroup">
             <CustomRadioButton value="byHrs">Por horas</CustomRadioButton>
             <CustomRadioButton value="halfTime">Medio tiempo</CustomRadioButton>

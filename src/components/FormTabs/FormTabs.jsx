@@ -10,8 +10,15 @@ import {
 } from '@chakra-ui/core';
 import { PersonalInfo, Skills, Experience } from './Forms';
 
-const FormTabs = () => {
+const FormTabs = React.memo(() => {
   const [tabIndex, setTabIndex] = useState(0);
+  const [signupForm, setSignupForm] = useState({
+    personalInfo: {},
+    skills: {},
+    experience: {},
+  });
+
+  console.log('[FinalData]', signupForm);
 
   return (
     <>
@@ -31,13 +38,13 @@ const FormTabs = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <PersonalInfo />
+            <PersonalInfo setFormState={setSignupForm} />
           </TabPanel>
           <TabPanel>
-            <Skills />
+            <Skills setFormState={setSignupForm} />
           </TabPanel>
           <TabPanel>
-            <Experience />
+            <Experience setFormState={setSignupForm} />
           </TabPanel>
         </TabPanels>
       </Tabs>
@@ -45,18 +52,24 @@ const FormTabs = () => {
         <Button
           variantColor="orange"
           display={tabIndex < 1 ? 'none' : 'block'}
-          onClick={() => setTabIndex((prevState) => prevState - 1)}>
+          onClick={() => {
+            window.scrollTo(0, 0);
+            setTabIndex((prevState) => prevState - 1);
+          }}>
           Volver
         </Button>
         <Button
           variantColor="orange"
-          onClick={() => setTabIndex((prevState) => prevState + 1)}
+          onClick={() => {
+            window.scrollTo(0, 0);
+            setTabIndex((prevState) => prevState + 1);
+          }}
           disabled={tabIndex === 2}>
           Siguiente
         </Button>
       </Flex>
     </>
   );
-};
+});
 
 export default FormTabs;

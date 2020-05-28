@@ -4,6 +4,9 @@ html {
   margin: 0; */
   box-sizing: border-box;
 }
+:root {
+  --red-color: #e90101;
+}
 
 .radioBtnsGroup {
   display: grid;
@@ -16,4 +19,15 @@ html {
   .radioBtnsGroup {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+.required::before {
+  content: '*';
+  color: var(--red-color);
+}
+
+.error-message {
+  font-size: 0.8rem;
+  color: var(--red-color);
+  font-style: italic;
 }

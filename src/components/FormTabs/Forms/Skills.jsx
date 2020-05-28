@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import AsyncSelect from './AsyncSelect';
 import {
   FormControl,
@@ -25,23 +25,50 @@ import {
   DiTerminal,
 } from 'react-icons/di';
 
+const initialState = {
+  lenguages: [],
+  frameworks: [],
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'SET-LENGUAGE':
+      if (state.lenguages.includes(action.lenguage)) return { ...state };
+      return { ...state, lenguages: [...state.lenguages, action.lenguage] };
+
+    case 'REMOVE-LENGUAGE':
+      return {
+        ...state,
+        lenguages: state.lenguages.filter((item) => item !== action.lenguage),
+      };
+
+    case 'SET-FRAMEWORK':
+      if (state.frameworks.includes(action.framework)) return { ...state };
+      return { ...state, frameworks: [...state.frameworks, action.framework] };
+
+    case 'REMOVE-FRAMEWORK':
+      return {
+        ...state,
+        frameworks: state.frameworks.filter(
+          (item) => item !== action.framework
+        ),
+      };
+
+    default:
+      break;
+  }
+};
+
 const Skills = () => {
-  const [lenguagesTag, setLenguagesTag] = React.useState([]);
-
-  const onSelectHandler = (value, id) => {
-    setLenguagesTag((current) => [...current, value]);
-  };
-
-  const onCloseTagHandler = (lenguage) => {
-    setLenguagesTag((current) => current.filter((item) => item !== lenguage));
-  };
-  console.log('TagsState', lenguagesTag);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <FormControl m={8}>
       <Grid templateColumns={{ md: 'repeat(2, 1fr)' }} gap={8}>
         <Box>
-          <FormLabel htmlFor="educationLevel">Nivel de formación</FormLabel>
+          <FormLabel htmlFor="educationLevel" className="required">
+            Nivel de formación
+          </FormLabel>
           <Select
             id="educationLevel"
             placeholder="Seleccione..."
@@ -71,12 +98,14 @@ const Skills = () => {
         </Box>
 
         <Box>
-          <FormLabel htmlFor="bilingue">¿Hablas inglés?</FormLabel>
+          <FormLabel htmlFor="bilingue" className="required">
+            ¿Hablas inglés?
+          </FormLabel>
           <Switch id="bilingue" color="orange" />
         </Box>
 
         <Box>
-          <FormLabel>Eres...</FormLabel>
+          <FormLabel className="required">Eres...</FormLabel>
           <RadioButtonGroup className="radioBtnsGroup">
             <CustomRadioButton leftIcon={DiJavascript1} value="frontend">
               Frontend
@@ -94,15 +123,17 @@ const Skills = () => {
         </Box>
 
         <Box>
+          <FormLabel className="required">¿Que lenguajes dominas?</FormLabel>
           <AsyncSelect
             canShow
-            label="¿Que lenguajes dominas?"
-            onSelect={onSelectHandler}
+            onSelect={(value, id) =>
+              dispatch({ type: 'SET-LENGUAGE', lenguage: value })
+            }
             url={`${process.env.REACT_APP_BACKEND_API_URL}/lenguage`}
-            id="lenguages"
+            idElement="lenguages"
           />
-          <Stack isInline justifyContent="center" mt={5}>
-            {lenguagesTag.map((lenguage, idx) => (
+          <Stack justify="center" spacing={2} mt={5}>
+            {state.lenguages.map((lenguage, idx) => (
               <Tag
                 key={idx}
                 variant="solid"
@@ -110,7 +141,11 @@ const Skills = () => {
                 rounded="full"
                 size="sm">
                 <TagLabel>{lenguage}</TagLabel>
-                <TagCloseButton onClick={() => onCloseTagHandler(lenguage)} />
+                <TagCloseButton
+                  onClick={() =>
+                    dispatch({ type: 'REMOVE-LENGUAGE', lenguage })
+                  }
+                />
               </Tag>
             ))}
           </Stack>
@@ -122,18 +157,34 @@ const Skills = () => {
         </Box>
 
         <Box>
-          <FormLabel htmlFor="frameworks">
+          <FormLabel className="required">
             ¿Que framework o librería dominas?
           </FormLabel>
-          <Select
-            id="frameworks"
-            placeholder="Seleccione..."
-            bg="imuko.secondaryGray">
-            <option value="tecnico">React</option>
-            <option value="tecnologo">Express</option>
-            <option value="profesional">Sprint</option>
-            <option value="empirico">Django</option>
-          </Select>
+          <AsyncSelect
+            canShow
+            onSelect={(value, id) =>
+              dispatch({ type: 'SET-FRAMEWORK', framework: value })
+            }
+            url={`${process.env.REACT_APP_BACKEND_API_URL}/frameworks`}
+            idElement="frameworks"
+          />
+          <Stack justify="center" spacing={2} mt={5}>
+            {state.frameworks.map((framework, idx) => (
+              <Tag
+                key={idx}
+                variant="solid"
+                variantColor="orange"
+                rounded="full"
+                size="sm">
+                <TagLabel>{framework}</TagLabel>
+                <TagCloseButton
+                  onClick={() =>
+                    dispatch({ type: 'REMOVE-FRAMEWORK', framework })
+                  }
+                />
+              </Tag>
+            ))}
+          </Stack>
         </Box>
 
         <Box>
