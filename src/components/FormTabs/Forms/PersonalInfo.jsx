@@ -3,8 +3,6 @@ import AsyncSelect from './AsyncSelect';
 import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  // FormHelperText,
   Input,
   Grid,
   Box,
@@ -15,101 +13,145 @@ const PersonalInfo = ({ setFormState }) => {
   const [departmentsUri, setDepartmentsUri] = useState(null);
   const [errorMessage, setErrorMessage] = useState({});
 
+  const onChangeFieldHandler = (name, value) => {
+    return setFormState((current) => ({
+      ...current,
+      personalInfo: {
+        ...current.personalInfo,
+        [name]: value,
+      },
+    }));
+  };
+
   const notEmpty = (value) => value && value.toString().trim() !== '';
 
-  const validateField = (element) => {
-    switch (element.name) {
-      case 'firstname':
-      case 'lastname':
-        if (notEmpty(element.value)) {
-          setErrorMessage((current) => ({ ...current, [element.name]: '' }));
-          // setErrorMessage((current) => delete current[element.name]);
-          return setFormState((current) => ({
+  const validateField = React.useCallback(
+    (element) => {
+      switch (element.name) {
+        case 'firstname':
+        case 'lastname':
+          if (notEmpty(element.value)) {
+            setErrorMessage((current) => ({ ...current, [element.name]: '' }));
+            // setErrorMessage((current) => delete current[element.name]);
+            return setFormState((current) => ({
+              ...current,
+              personalInfo: {
+                ...current.personalInfo,
+                [element.name]: { value: element.value, isValid: true },
+              },
+            }));
+          }
+
+          setFormState((current) => ({
             ...current,
             personalInfo: {
               ...current.personalInfo,
-              [element.name]: element.value,
+              [element.name]: { isValid: false },
             },
           }));
-        }
-        return setErrorMessage((current) => ({
-          ...current,
-          [element.name]: 'Este campo es requerido.',
-        }));
 
-      case 'phone':
-        if (element.value.length > 12) {
-          setErrorMessage((current) => ({ ...current, [element.name]: '' }));
-          // setErrorMessage((current) => ({...current, delete current[element.name]}));
-          return setFormState((current) => ({
+          return setErrorMessage((current) => ({
+            ...current,
+            [element.name]: 'Este campo es requerido.',
+          }));
+
+        case 'phone':
+          if (element.value.length > 12) {
+            setErrorMessage((current) => ({ ...current, [element.name]: '' }));
+            // setErrorMessage((current) => ({...current, delete current[element.name]}));
+            return setFormState((current) => ({
+              ...current,
+              personalInfo: {
+                ...current.personalInfo,
+                [element.name]: { value: element.value, isValid: true },
+              },
+            }));
+          }
+
+          setFormState((current) => ({
             ...current,
             personalInfo: {
               ...current.personalInfo,
-              [element.name]: element.value,
+              [element.name]: { isValid: false },
             },
           }));
-        }
-        return setErrorMessage((current) => ({
-          ...current,
-          [element.name]: 'Este campo debe contener mínimo 13 caracteres.',
-        }));
 
-      case 'email':
-        if (
-          /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(element.value)
-        ) {
-          setErrorMessage((current) => ({ ...current, [element.name]: '' }));
-          // setErrorMessage((current) => ({...current, delete current[element.name]}));
-          return setFormState((current) => ({
+          return setErrorMessage((current) => ({
+            ...current,
+            [element.name]: 'Este campo debe contener mínimo 13 caracteres.',
+          }));
+
+        case 'email':
+          if (
+            /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(
+              element.value
+            )
+          ) {
+            setErrorMessage((current) => ({ ...current, [element.name]: '' }));
+            // setErrorMessage((current) => ({...current, delete current[element.name]}));
+            return setFormState((current) => ({
+              ...current,
+              personalInfo: {
+                ...current.personalInfo,
+                [element.name]: { value: element.value, isValid: true },
+              },
+            }));
+          }
+
+          setFormState((current) => ({
             ...current,
             personalInfo: {
               ...current.personalInfo,
-              [element.name]: element.value,
+              [element.name]: { isValid: false },
             },
           }));
-        }
-        return setErrorMessage((current) => ({
-          ...current,
-          [element.name]: 'Debes ingresar un correo válido.',
-        }));
 
-      case 'country':
-      case 'department':
-        if (notEmpty(element.value)) {
-          setErrorMessage((current) => ({ ...current, [element.name]: '' }));
-          // setErrorMessage((current) => ({...current, delete current[element.name]}));
-          return setFormState((current) => ({
+          return setErrorMessage((current) => ({
+            ...current,
+            [element.name]: 'Debes ingresar un correo válido.',
+          }));
+
+        case 'country':
+        case 'department':
+          if (notEmpty(element.value)) {
+            setErrorMessage((current) => ({ ...current, [element.name]: '' }));
+            // setErrorMessage((current) => ({...current, delete current[element.name]}));
+            return setFormState((current) => ({
+              ...current,
+              personalInfo: {
+                ...current.personalInfo,
+                [element.name]: { value: element.value, isValid: true },
+              },
+            }));
+          }
+
+          setFormState((current) => ({
             ...current,
             personalInfo: {
               ...current.personalInfo,
-              [element.name]: element.value,
+              [element.name]: { isValid: false },
             },
           }));
-        }
-        return setErrorMessage((current) => ({
-          ...current,
-          [element.name]: 'Este campo es requerido.',
-        }));
 
-      default:
-        break;
-    }
-  };
+          return setErrorMessage((current) => ({
+            ...current,
+            [element.name]: 'Este campo es requerido.',
+          }));
 
-  const countryChangeHandler = (value, name) => {
+        default:
+          break;
+      }
+    },
+    [setFormState]
+  );
+
+  const countryChangeHandler = (element) => {
     setDepartmentsUri(
-      `${process.env.REACT_APP_BACKEND_API_URL}/departments/${value}`
+      `${process.env.REACT_APP_BACKEND_API_URL}/departments/${element.value}`
     );
 
-    const target = { value, name };
-    validateField(target);
+    validateField(element);
   };
-
-  const departmentsChangeHandler = (value, name) => {
-    const target = { value, name };
-    validateField(target);
-  };
-  console.log('Errors', errorMessage);
 
   return (
     <FormControl m={8}>
@@ -199,7 +241,7 @@ const PersonalInfo = ({ setFormState }) => {
             url={departmentsUri}
             canShow={departmentsUri}
             name="department"
-            onSelect={departmentsChangeHandler}
+            onSelect={validateField}
           />
           <span className="error-message">{errorMessage.department}</span>
         </Box>
@@ -209,7 +251,11 @@ const PersonalInfo = ({ setFormState }) => {
           <Textarea
             resize="none"
             placeholder="Hablanos de ti"
+            name="aboutYou"
             bg="imuko.secondaryGray"
+            onChange={(event) =>
+              onChangeFieldHandler(event.target.name, event.target.value)
+            }
           />
         </Box>
       </Grid>

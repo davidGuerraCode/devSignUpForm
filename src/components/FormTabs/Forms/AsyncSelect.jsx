@@ -12,7 +12,13 @@ const AsyncSelect = React.memo(
           name={selectName}
           bg="imuko.secondaryGray"
           disabled={loading || !canShow}
-          onChange={(event) => onSelect(event.target.value, event.target.name)}
+          onChange={(event) => {
+            const element = {
+              name: event.target.name,
+              value: event.target.value,
+            };
+            onSelect(element);
+          }}
           placeholder={loading ? 'Cargando...' : 'Seleccione...'}>
           {countries.length > 0 &&
             canShow &&

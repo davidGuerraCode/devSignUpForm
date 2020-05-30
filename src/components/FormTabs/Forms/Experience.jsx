@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FormControl,
   FormLabel,
@@ -15,13 +15,67 @@ import {
 } from '@chakra-ui/core';
 import CustomRadioButton from './CustomRadioButton/CustomRadioButton';
 
-const Experience = () => {
+const Experience = ({ setFormState }) => {
+  const [errorMessage, setErrorMessage] = useState({});
+  const notEmpty = (value) => value && value.toString().trim() !== '';
+
+  const validateField = React.useCallback(
+    (element) => {
+      switch (element.name) {
+        case 'wageAspiration':
+          if (notEmpty(element.value)) {
+            setErrorMessage((current) => ({ ...current, [element.name]: '' }));
+            // setErrorMessage((current) => ({...current, delete current[element.name]}));
+            return setFormState((current) => ({
+              ...current,
+              experience: {
+                ...current.experience,
+                [element.name]: element.value,
+              },
+            }));
+          }
+          return setErrorMessage((current) => ({
+            ...current,
+            [element.name]: 'Este campo es requerido.',
+          }));
+
+        case 'modality':
+        case 'workStatus':
+        case 'availability':
+          if (notEmpty(element.value)) {
+            setErrorMessage((current) => ({ ...current, [element.name]: '' }));
+            // setErrorMessage((current) => ({...current, delete current[element.name]}));
+            return setFormState((current) => ({
+              ...current,
+              experience: {
+                ...current.experience,
+                [element.name]: element.value,
+              },
+            }));
+          }
+          return setErrorMessage((current) => ({
+            ...current,
+            [element.name]: 'Este campo es requerido.',
+          }));
+
+        default:
+          break;
+      }
+    },
+    [setFormState]
+  );
+
   return (
     <FormControl m={8}>
       <Grid templateColumns={{ md: 'repeat(2, 1fr)' }} gap={8}>
         <Box>
           <FormLabel className="required">Estatus laboral</FormLabel>
-          <RadioButtonGroup className="radioBtnsGroup">
+          <RadioButtonGroup
+            className="radioBtnsGroup"
+            onChange={(val) => {
+              const element = { name: 'workStatus', value: val };
+              validateField(element);
+            }}>
             <CustomRadioButton
               fontSize={['13px', null, null, '1rem']}
               value="working">
@@ -36,7 +90,12 @@ const Experience = () => {
         </Box>
         <Box>
           <FormLabel className="required">Modalidad</FormLabel>
-          <RadioButtonGroup className="radioBtnsGroup">
+          <RadioButtonGroup
+            className="radioBtnsGroup"
+            onChange={(val) => {
+              const element = { name: 'modality', value: val };
+              validateField(element);
+            }}>
             <CustomRadioButton value="remote">Remoto</CustomRadioButton>
             <CustomRadioButton value="office">Oficina</CustomRadioButton>
             <CustomRadioButton value="anyway">Cualquiera</CustomRadioButton>
@@ -44,12 +103,14 @@ const Experience = () => {
         </Box>
 
         <Box>
-          <FormLabel htmlFor="salary" className="required">
+          <FormLabel htmlFor="wageAspiration" className="required">
             Aspiración Salarial
           </FormLabel>
           <Select
-            id="salary"
+            id="wageAspiration"
+            name="wageAspiration"
             placeholder="Seleccione..."
+            onChange={(event) => validateField(event.target)}
             bg="imuko.secondaryGray">
             <option value="$1.000.000 a $2.000.000">
               $1.000.000 a $2.000.000
@@ -65,6 +126,7 @@ const Experience = () => {
             </option>
             <option value="Mas de $5.000.000">Mas de $5.000.000</option>
           </Select>
+          <span className="error-message">{errorMessage.wageAspiration}</span>
         </Box>
 
         <Box>
@@ -79,7 +141,12 @@ const Experience = () => {
 
         <Box>
           <FormLabel className="required">¿Disponibilidad?</FormLabel>
-          <RadioButtonGroup className="radioBtnsGroup">
+          <RadioButtonGroup
+            className="radioBtnsGroup"
+            onChange={(val) => {
+              const element = { name: 'availability', value: val };
+              validateField(element);
+            }}>
             <CustomRadioButton value="byHrs">Por horas</CustomRadioButton>
             <CustomRadioButton value="halfTime">Medio tiempo</CustomRadioButton>
             <CustomRadioButton value="full time">

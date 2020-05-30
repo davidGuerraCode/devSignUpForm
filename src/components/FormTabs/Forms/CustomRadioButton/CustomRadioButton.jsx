@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import { Button } from '@chakra-ui/core';
 
 const CustomRadioButton = forwardRef((props, ref) => {
-  const { isChecked, isDisabled, value, ...rest } = props;
+  const { isChecked, isDisabled, value, onDevAreaChange, ...rest } = props;
 
   return (
     <Button

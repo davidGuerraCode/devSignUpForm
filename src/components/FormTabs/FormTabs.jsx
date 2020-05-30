@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   Tabs,
   TabList,
@@ -10,13 +10,39 @@ import {
 } from '@chakra-ui/core';
 import { PersonalInfo, Skills, Experience } from './Forms';
 
+const initialState = {
+  personalInfo: {
+    firstname: { value: '', isValid: false },
+    lastname: { value: '', isValid: false },
+    phone: { value: '', isValid: false },
+    email: { value: '', isValid: false },
+    country: { value: '', isValid: false },
+    department: { value: '', isValid: false },
+  },
+  skills: {
+    educationLevel: { value: '', isValid: false },
+    devArea: { value: '', isValid: false },
+    lenguages: { value: [], isValid: false },
+    frameworks: { value: [], isValid: false },
+  },
+  experience: {},
+};
+
+const validateFields = (fields) => {
+  const isValid = Object.entries(fields).every(
+    (field) => field[1].isValid === true
+  );
+
+  return isValid;
+};
+
 const FormTabs = React.memo(() => {
   const [tabIndex, setTabIndex] = useState(0);
-  const [signupForm, setSignupForm] = useState({
-    personalInfo: {},
-    skills: {},
-    experience: {},
-  });
+  const [signupForm, setSignupForm] = useState(initialState);
+
+  const isPersonalInfoValid = validateFields(signupForm.personalInfo);
+  const isSkillsValid = validateFields(signupForm.skills);
+  const isExpValid = validateFields(signupForm.experience);
 
   console.log('[FinalData]', signupForm);
 
@@ -31,8 +57,14 @@ const FormTabs = React.memo(() => {
           <Tab _selected={{ color: 'white', bg: 'imuko.orange' }}>
             Información Personal
           </Tab>
-          <Tab _selected={{ color: 'white', bg: 'imuko.orange' }}>Skills</Tab>
-          <Tab _selected={{ color: 'white', bg: 'imuko.orange' }}>
+          <Tab
+            // isDisabled={!isPersonalInfoValid}
+            _selected={{ color: 'white', bg: 'imuko.orange' }}>
+            Skills
+          </Tab>
+          <Tab
+            isDisabled={!isPersonalInfoValid || !isSkillsValid}
+            _selected={{ color: 'white', bg: 'imuko.orange' }}>
             Experiencia e Intereses
           </Tab>
         </TabList>
@@ -64,7 +96,11 @@ const FormTabs = React.memo(() => {
             window.scrollTo(0, 0);
             setTabIndex((prevState) => prevState + 1);
           }}
-          disabled={tabIndex === 2}>
+          disabled={
+            !isPersonalInfoValid ||
+            (tabIndex === 1 && !isSkillsValid) ||
+            (tabIndex === 2 && !isExpValid)
+          }>
           Siguiente
         </Button>
       </Flex>
