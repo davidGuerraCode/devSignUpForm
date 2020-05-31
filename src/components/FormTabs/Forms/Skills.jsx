@@ -347,12 +347,13 @@ const Skills = ({ setFormState, signupForm }) => {
             url={`${process.env.REACT_APP_BACKEND_API_URL}/lenguage`}
           />
           <span className="error-message">{errorMessage.lenguages}</span>
-          <Stack isInline justify="center" spacing={2} mt={5}>
+          <Stack isInline justify="center" maxWidth="350px" flexWrap="wrap">
             {state.lenguages.map((lenguage, idx) => (
               <Tag
                 key={idx}
                 variant="solid"
                 variantColor="orange"
+                mt={3}
                 rounded="full"
                 size="sm">
                 <TagLabel>{lenguage}</TagLabel>
@@ -402,12 +403,13 @@ const Skills = ({ setFormState, signupForm }) => {
             url={`${process.env.REACT_APP_BACKEND_API_URL}/frameworks`}
           />
           <span className="error-message">{errorMessage.frameworks}</span>
-          <Stack isInline justify="center" spacing={2} mt={5}>
+          <Stack isInline justify="center" maxWidth="350px" flexWrap="wrap">
             {state.frameworks.map((framework, idx) => (
               <Tag
                 key={idx}
                 variant="solid"
                 variantColor="orange"
+                mt={3}
                 rounded="full"
                 size="sm">
                 <TagLabel>{framework}</TagLabel>
