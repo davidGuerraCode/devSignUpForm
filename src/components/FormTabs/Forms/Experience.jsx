@@ -213,7 +213,7 @@ const Experience = ({ setFormState }) => {
         </Box>
 
         <Box gridColumn={{ md: 'span 2' }}>
-          <FormLabel htmlFor="aboutExp">Hablanos de expreciencia</FormLabel>
+          <FormLabel htmlFor="aboutExp">Hablanos de tu experiencia</FormLabel>
           <Textarea
             resize="none"
             name="aboutExp"
