@@ -18,7 +18,6 @@ import CustomRadioButton from './CustomRadioButton/CustomRadioButton';
 import {
   DiJavascript1,
   DiNodejsSmall,
-  // DiAws,
   DiBitbucket,
   DiTerminal,
 } from 'react-icons/di';

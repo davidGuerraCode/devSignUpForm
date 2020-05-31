@@ -32,7 +32,6 @@ const PersonalInfo = ({ setFormState }) => {
         case 'lastname':
           if (notEmpty(element.value)) {
             setErrorMessage((current) => ({ ...current, [element.name]: '' }));
-            // setErrorMessage((current) => delete current[element.name]);
             return setFormState((current) => ({
               ...current,
               personalInfo: {
@@ -58,7 +57,6 @@ const PersonalInfo = ({ setFormState }) => {
         case 'phone':
           if (element.value.length > 12) {
             setErrorMessage((current) => ({ ...current, [element.name]: '' }));
-            // setErrorMessage((current) => ({...current, delete current[element.name]}));
             return setFormState((current) => ({
               ...current,
               personalInfo: {
@@ -88,7 +86,6 @@ const PersonalInfo = ({ setFormState }) => {
             )
           ) {
             setErrorMessage((current) => ({ ...current, [element.name]: '' }));
-            // setErrorMessage((current) => ({...current, delete current[element.name]}));
             return setFormState((current) => ({
               ...current,
               personalInfo: {
@@ -115,7 +112,6 @@ const PersonalInfo = ({ setFormState }) => {
         case 'department':
           if (notEmpty(element.value)) {
             setErrorMessage((current) => ({ ...current, [element.name]: '' }));
-            // setErrorMessage((current) => ({...current, delete current[element.name]}));
             return setFormState((current) => ({
               ...current,
               personalInfo: {

@@ -72,7 +72,7 @@ const FormTabs = React.memo(() => {
     setShowData(true);
   };
 
-  console.log('[FinalData]', signupForm);
+  // console.log('[FinalData]', signupForm);
 
   return (
     <>
