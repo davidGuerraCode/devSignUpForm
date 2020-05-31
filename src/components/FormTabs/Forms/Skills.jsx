@@ -1,10 +1,8 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
 import AsyncSelect from './AsyncSelect';
 import {
   FormControl,
   FormLabel,
-  // FormErrorMessage,
-  // FormHelperText,
   Input,
   Select,
   Grid,
@@ -66,10 +64,48 @@ const devAreas = [
   { area: 'Devops', icon: DiBitbucket },
 ];
 
-const Skills = ({ setFormState }) => {
+const Skills = ({ setFormState, signupForm }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [errorMessage, setErrorMessage] = useState({});
   const notEmpty = (value) => value && value.toString().trim() !== '';
+
+  const onChangeFieldHandler = (name, value) => {
+    return setFormState((current) => ({
+      ...current,
+      skills: {
+        ...current.skills,
+        [name]: { value },
+      },
+    }));
+  };
+
+  useEffect(() => {
+    if (signupForm.frameworks.value.length < 1) {
+      setFormState((current) => ({
+        ...current,
+        skills: {
+          ...current.skills,
+          frameworks: {
+            ...current.skills.frameworks,
+            isValid: false,
+          },
+        },
+      }));
+    }
+
+    if (signupForm.lenguages.value.length < 1) {
+      setFormState((current) => ({
+        ...current,
+        skills: {
+          ...current.skills,
+          lenguages: {
+            ...current.skills.lenguages,
+            isValid: false,
+          },
+        },
+      }));
+    }
+  }, [signupForm.frameworks.value, signupForm.lenguages.value, setFormState]);
 
   const validateField = React.useCallback(
     (element) => {
@@ -119,6 +155,8 @@ const Skills = ({ setFormState }) => {
 
               return { ...current };
             });
+
+            return;
           }
 
           setFormState((current) => {
@@ -127,8 +165,8 @@ const Skills = ({ setFormState }) => {
               skills: {
                 ...current.skills,
                 [element.name]: {
+                  ...current.skills.lenguages,
                   value: [...current.skills.lenguages.value],
-                  isValid: false,
                 },
               },
             };
@@ -162,6 +200,8 @@ const Skills = ({ setFormState }) => {
 
               return { ...current };
             });
+
+            return;
           }
 
           setFormState((current) => {
@@ -170,8 +210,8 @@ const Skills = ({ setFormState }) => {
               skills: {
                 ...current.skills,
                 [element.name]: {
+                  ...current.skills.frameworks,
                   value: [...current.skills.frameworks.value],
-                  isValid: false,
                 },
               },
             };
@@ -185,7 +225,6 @@ const Skills = ({ setFormState }) => {
         case 'devArea':
           if (notEmpty(element.value)) {
             setErrorMessage((current) => ({ ...current, [element.name]: '' }));
-            // setErrorMessage((current) => ({...current, delete current[element.name]}));
             return setFormState((current) => ({
               ...current,
               skills: {
@@ -213,7 +252,10 @@ const Skills = ({ setFormState }) => {
             ...current,
             skills: {
               ...current.skills,
-              [element.name]: element.checked,
+              [element.name]: {
+                value: element.checked,
+                isValid: true,
+              },
             },
           }));
 
@@ -247,8 +289,12 @@ const Skills = ({ setFormState }) => {
           <FormLabel htmlFor="institute">Institución</FormLabel>
           <Input
             id="institute"
+            name="institute"
             placeholder="Universidad Nacional"
             bg="imuko.secondaryGray"
+            onChange={(event) =>
+              onChangeFieldHandler(event.target.name, event.target.value)
+            }
           />
         </Box>
 
@@ -256,8 +302,12 @@ const Skills = ({ setFormState }) => {
           <FormLabel htmlFor="profession">Profesión</FormLabel>
           <Input
             id="profession"
+            name="profession"
             placeholder="Web Developer"
             bg="imuko.secondaryGray"
+            onChange={(event) =>
+              onChangeFieldHandler(event.target.name, event.target.value)
+            }
           />
         </Box>
 
@@ -298,7 +348,7 @@ const Skills = ({ setFormState }) => {
             url={`${process.env.REACT_APP_BACKEND_API_URL}/lenguage`}
           />
           <span className="error-message">{errorMessage.lenguages}</span>
-          <Stack justify="center" spacing={2} mt={5}>
+          <Stack isInline justify="center" spacing={2} mt={5}>
             {state.lenguages.map((lenguage, idx) => (
               <Tag
                 key={idx}
@@ -308,9 +358,21 @@ const Skills = ({ setFormState }) => {
                 size="sm">
                 <TagLabel>{lenguage}</TagLabel>
                 <TagCloseButton
-                  onClick={() =>
-                    dispatch({ type: 'REMOVE-LENGUAGE', lenguage })
-                  }
+                  onClick={() => {
+                    dispatch({ type: 'REMOVE-LENGUAGE', lenguage });
+                    setFormState((current) => ({
+                      ...current,
+                      skills: {
+                        ...current.skills,
+                        lenguages: {
+                          ...current.skills.lenguages,
+                          value: current.skills.lenguages.value.filter(
+                            (item) => item !== lenguage
+                          ),
+                        },
+                      },
+                    }));
+                  }}
                 />
               </Tag>
             ))}
@@ -319,7 +381,15 @@ const Skills = ({ setFormState }) => {
 
         <Box>
           <FormLabel htmlFor="otherLenguage">Otros lenguajes</FormLabel>
-          <Input id="otherLenguage" placeholder="F#" bg="imuko.secondaryGray" />
+          <Input
+            id="otherLenguage"
+            name="otherLenguage"
+            placeholder="F#"
+            bg="imuko.secondaryGray"
+            onChange={(event) =>
+              onChangeFieldHandler(event.target.name, event.target.value)
+            }
+          />
         </Box>
 
         <Box>
@@ -332,7 +402,8 @@ const Skills = ({ setFormState }) => {
             onSelect={validateField}
             url={`${process.env.REACT_APP_BACKEND_API_URL}/frameworks`}
           />
-          <Stack justify="center" spacing={2} mt={5}>
+          <span className="error-message">{errorMessage.frameworks}</span>
+          <Stack isInline justify="center" spacing={2} mt={5}>
             {state.frameworks.map((framework, idx) => (
               <Tag
                 key={idx}
@@ -342,9 +413,20 @@ const Skills = ({ setFormState }) => {
                 size="sm">
                 <TagLabel>{framework}</TagLabel>
                 <TagCloseButton
-                  onClick={() =>
-                    dispatch({ type: 'REMOVE-FRAMEWORK', framework })
-                  }
+                  onClick={() => {
+                    dispatch({ type: 'REMOVE-FRAMEWORK', framework });
+                    setFormState((current) => ({
+                      ...current,
+                      skills: {
+                        ...current.skills,
+                        frameworks: {
+                          value: current.skills.frameworks.value.filter(
+                            (item) => item !== framework
+                          ),
+                        },
+                      },
+                    }));
+                  }}
                 />
               </Tag>
             ))}
@@ -357,6 +439,10 @@ const Skills = ({ setFormState }) => {
             id="otherFrameworks"
             placeholder="Flask"
             bg="imuko.secondaryGray"
+            name="otherFrameworks"
+            onChange={(event) =>
+              onChangeFieldHandler(event.target.name, event.target.value)
+            }
           />
         </Box>
       </Grid>

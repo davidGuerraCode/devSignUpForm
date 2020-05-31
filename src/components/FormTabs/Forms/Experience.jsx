@@ -19,21 +19,39 @@ const Experience = ({ setFormState }) => {
   const [errorMessage, setErrorMessage] = useState({});
   const notEmpty = (value) => value && value.toString().trim() !== '';
 
+  const onChangeFieldHandler = (name, value) => {
+    return setFormState((current) => ({
+      ...current,
+      experience: {
+        ...current.experience,
+        [name]: { value },
+      },
+    }));
+  };
+
   const validateField = React.useCallback(
     (element) => {
       switch (element.name) {
         case 'wageAspiration':
           if (notEmpty(element.value)) {
             setErrorMessage((current) => ({ ...current, [element.name]: '' }));
-            // setErrorMessage((current) => ({...current, delete current[element.name]}));
             return setFormState((current) => ({
               ...current,
               experience: {
                 ...current.experience,
-                [element.name]: element.value,
+                [element.name]: { value: element.value, isValid: true },
               },
             }));
           }
+
+          setFormState((current) => ({
+            ...current,
+            experience: {
+              ...current.experience,
+              [element.name]: { isValid: false },
+            },
+          }));
+
           return setErrorMessage((current) => ({
             ...current,
             [element.name]: 'Este campo es requerido.',
@@ -44,15 +62,23 @@ const Experience = ({ setFormState }) => {
         case 'availability':
           if (notEmpty(element.value)) {
             setErrorMessage((current) => ({ ...current, [element.name]: '' }));
-            // setErrorMessage((current) => ({...current, delete current[element.name]}));
             return setFormState((current) => ({
               ...current,
               experience: {
                 ...current.experience,
-                [element.name]: element.value,
+                [element.name]: { value: element.value, isValid: true },
               },
             }));
           }
+
+          setFormState((current) => ({
+            ...current,
+            experience: {
+              ...current.experience,
+              [element.name]: { isValid: false },
+            },
+          }));
+
           return setErrorMessage((current) => ({
             ...current,
             [element.name]: 'Este campo es requerido.',
@@ -134,8 +160,12 @@ const Experience = ({ setFormState }) => {
           <Input
             type="number"
             id="price"
+            name="priceHr"
             placeholder="$ 25"
             bg="imuko.secondaryGray"
+            onChange={(event) =>
+              onChangeFieldHandler(event.target.name, event.target.value)
+            }
           />
         </Box>
 
@@ -156,15 +186,26 @@ const Experience = ({ setFormState }) => {
         </Box>
 
         <Box>
-          <FormLabel htmlFor="bilingue">¿Disponibilidad de viajar?</FormLabel>
-          <Switch id="bilingue" color="orange" />
+          <FormLabel htmlFor="canTravel">¿Disponibilidad de viajar?</FormLabel>
+          <Switch
+            id="canTravel"
+            name="canTravel"
+            color="orange"
+            onChange={(event) =>
+              onChangeFieldHandler(event.target.name, event.target.checked)
+            }
+          />
         </Box>
 
         <Box>
           <FormLabel htmlFor="yearExp">Años de experiencia</FormLabel>
           <Select
             id="yearExp"
+            name="yearExp"
             placeholder="Seleccione..."
+            onChange={(event) =>
+              onChangeFieldHandler(event.target.name, event.target.value)
+            }
             bg="imuko.secondaryGray">
             <option value="1">1 año</option>
             <option value="2">2 años</option>
@@ -175,10 +216,15 @@ const Experience = ({ setFormState }) => {
         </Box>
 
         <Box gridColumn={{ md: 'span 2' }}>
-          <FormLabel>Hablanos de expreciencia</FormLabel>
+          <FormLabel htmlFor="aboutExp">Hablanos de expreciencia</FormLabel>
           <Textarea
             resize="none"
+            name="aboutExp"
+            id="aboutExp"
             placeholder="Desarrollador web con mas de..."
+            onChange={(event) =>
+              onChangeFieldHandler(event.target.name, event.target.value)
+            }
             bg="imuko.secondaryGray"
           />
         </Box>

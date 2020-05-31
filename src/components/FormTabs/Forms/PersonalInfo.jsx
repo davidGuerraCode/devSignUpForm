@@ -18,7 +18,7 @@ const PersonalInfo = ({ setFormState }) => {
       ...current,
       personalInfo: {
         ...current.personalInfo,
-        [name]: value,
+        [name]: { value },
       },
     }));
   };
@@ -189,8 +189,12 @@ const PersonalInfo = ({ setFormState }) => {
           <Input
             type="number"
             id="age"
+            name="age"
             placeholder="25"
             bg="imuko.secondaryGray"
+            onChange={(event) =>
+              onChangeFieldHandler(event.target.name, event.target.value)
+            }
           />
         </Box>
 

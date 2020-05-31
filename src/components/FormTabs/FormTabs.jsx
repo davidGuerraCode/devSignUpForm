@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import {
   Tabs,
   TabList,
@@ -25,13 +25,35 @@ const initialState = {
     lenguages: { value: [], isValid: false },
     frameworks: { value: [], isValid: false },
   },
-  experience: {},
+  experience: {
+    workStatus: {
+      value: '',
+      isValid: false,
+    },
+    modality: {
+      value: '',
+      isValid: false,
+    },
+    availability: {
+      value: '',
+      isValid: false,
+    },
+    wageAspiration: {
+      value: '',
+      isValid: false,
+    },
+  },
 };
 
 const validateFields = (fields) => {
-  const isValid = Object.entries(fields).every(
-    (field) => field[1].isValid === true
-  );
+  const isValid = Object.entries(fields)
+    .reduce((acc, field) => {
+      if (field[1].hasOwnProperty('isValid')) {
+        return [...acc, field[1]];
+      }
+      return acc;
+    }, [])
+    .every((field) => field.isValid === true);
 
   return isValid;
 };
@@ -39,10 +61,16 @@ const validateFields = (fields) => {
 const FormTabs = React.memo(() => {
   const [tabIndex, setTabIndex] = useState(0);
   const [signupForm, setSignupForm] = useState(initialState);
+  const [showData, setShowData] = useState(false);
 
   const isPersonalInfoValid = validateFields(signupForm.personalInfo);
   const isSkillsValid = validateFields(signupForm.skills);
   const isExpValid = validateFields(signupForm.experience);
+
+  const onSubmitHandler = (target) => {
+    console.log('{finalData}', signupForm);
+    setShowData(true);
+  };
 
   console.log('[FinalData]', signupForm);
 
@@ -58,7 +86,7 @@ const FormTabs = React.memo(() => {
             Información Personal
           </Tab>
           <Tab
-            // isDisabled={!isPersonalInfoValid}
+            isDisabled={!isPersonalInfoValid}
             _selected={{ color: 'white', bg: 'imuko.orange' }}>
             Skills
           </Tab>
@@ -73,7 +101,10 @@ const FormTabs = React.memo(() => {
             <PersonalInfo setFormState={setSignupForm} />
           </TabPanel>
           <TabPanel>
-            <Skills setFormState={setSignupForm} />
+            <Skills
+              setFormState={setSignupForm}
+              signupForm={signupForm.skills}
+            />
           </TabPanel>
           <TabPanel>
             <Experience setFormState={setSignupForm} />
@@ -90,20 +121,32 @@ const FormTabs = React.memo(() => {
           }}>
           Volver
         </Button>
-        <Button
-          variantColor="orange"
-          onClick={() => {
-            window.scrollTo(0, 0);
-            setTabIndex((prevState) => prevState + 1);
-          }}
-          disabled={
-            !isPersonalInfoValid ||
-            (tabIndex === 1 && !isSkillsValid) ||
-            (tabIndex === 2 && !isExpValid)
-          }>
-          Siguiente
-        </Button>
+        {tabIndex === 2 ? (
+          <Button
+            variantColor="orange"
+            disabled={!isExpValid}
+            onClick={(event) => onSubmitHandler(event.target)}>
+            Registrate
+          </Button>
+        ) : (
+          <Button
+            variantColor="orange"
+            onClick={() => {
+              window.scrollTo(0, 0);
+              setTabIndex((prevState) => prevState + 1);
+            }}
+            disabled={
+              !isPersonalInfoValid || (tabIndex === 1 && !isSkillsValid)
+            }>
+            Siguiente
+          </Button>
+        )}
       </Flex>
+      {showData ? (
+        <Flex justifyContent="center">
+          <pre>{JSON.stringify(signupForm, null, 4)}</pre>
+        </Flex>
+      ) : null}
     </>
   );
 });
