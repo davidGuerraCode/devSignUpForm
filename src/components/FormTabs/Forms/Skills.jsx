@@ -316,7 +316,7 @@ const Skills = ({ setFormState, signupForm }) => {
           </FormLabel>
           <Switch
             id="bilingue"
-            color="orange"
+            color="imuko.mainBlue"
             name="bilingue"
             onChange={(event) => validateField(event.target)}
           />
@@ -352,7 +352,7 @@ const Skills = ({ setFormState, signupForm }) => {
               <Tag
                 key={idx}
                 variant="solid"
-                variantColor="orange"
+                bg="imuko.mainBlue"
                 mt={3}
                 rounded="full"
                 size="sm">
@@ -408,7 +408,7 @@ const Skills = ({ setFormState, signupForm }) => {
               <Tag
                 key={idx}
                 variant="solid"
-                variantColor="orange"
+                bg="imuko.mainBlue"
                 mt={3}
                 rounded="full"
                 size="sm">

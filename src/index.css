@@ -1,8 +1,10 @@
 *,
+*:active,
 html {
   /* padding: 0;
   margin: 0; */
-  box-sizing: border-box;
+  box-shadow: none !important;
+  outline: none;
 }
 :root {
   --red-color: #e90101;

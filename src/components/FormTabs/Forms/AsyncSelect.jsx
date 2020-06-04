@@ -6,6 +6,9 @@ const AsyncSelect = React.memo(
   ({ url, onSelect, canShow, name: selectName }) => {
     const [countries, loading] = useFetchData(url);
 
+    const capitalize = (value) =>
+      value.charAt(0).toUpperCase() + value.slice(1);
+
     return (
       <>
         <Select
@@ -27,7 +30,7 @@ const AsyncSelect = React.memo(
                 key={id}
                 value={selectName === 'country' ? id : name}
                 style={{ textTransform: 'capitalize' }}>
-                {name}
+                {capitalize(name)}
               </option>
             ))}
         </Select>

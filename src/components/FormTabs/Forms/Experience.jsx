@@ -128,6 +128,7 @@ const Experience = ({ setFormState }) => {
         <Box>
           <FormLabel htmlFor="wageAspiration" className="required">
             Aspiración Salarial
+            <sup> (Pesos)</sup>
           </FormLabel>
           <Select
             id="wageAspiration"
@@ -153,7 +154,9 @@ const Experience = ({ setFormState }) => {
         </Box>
 
         <Box>
-          <FormLabel htmlFor="price">Precio Hora ($)</FormLabel>
+          <FormLabel htmlFor="price">
+            Precio Hora <sup>(Dolares)</sup>
+          </FormLabel>
           <Input
             type="number"
             id="price"

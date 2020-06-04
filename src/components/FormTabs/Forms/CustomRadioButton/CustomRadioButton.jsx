@@ -7,7 +7,9 @@ const CustomRadioButton = forwardRef((props, ref) => {
   return (
     <Button
       ref={ref}
-      variantColor={isChecked ? 'orange' : 'gray'}
+      bg={isChecked ? 'imuko.mainBlue' : 'imuko.secondaryGray'}
+      color={isChecked ? '#fff' : '#455865'}
+      _hover={{ bg: 'imuko.mainBlue', color: '#fff' }}
       aria-checked={isChecked}
       role="radio"
       isDisabled={isDisabled}

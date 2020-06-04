@@ -55,7 +55,7 @@ const PersonalInfo = ({ setFormState }) => {
           }));
 
         case 'phone':
-          if (element.value.length > 12) {
+          if (element.value.length > 8) {
             setErrorMessage((current) => ({ ...current, [element.name]: '' }));
             return setFormState((current) => ({
               ...current,

@@ -82,17 +82,17 @@ const FormTabs = React.memo(() => {
         index={tabIndex}
         onChange={(idx) => setTabIndex(idx)}>
         <TabList mt={10} px={5} justifyContent="center">
-          <Tab _selected={{ color: 'white', bg: 'imuko.orange' }}>
+          <Tab _selected={{ color: 'white', bg: 'imuko.mainBlue' }}>
             Información Personal
           </Tab>
           <Tab
-            isDisabled={!isPersonalInfoValid}
-            _selected={{ color: 'white', bg: 'imuko.orange' }}>
+            // isDisabled={!isPersonalInfoValid}
+            _selected={{ color: 'white', bg: 'imuko.mainBlue' }}>
             Skills
           </Tab>
           <Tab
-            isDisabled={!isPersonalInfoValid || !isSkillsValid}
-            _selected={{ color: 'white', bg: 'imuko.orange' }}>
+            // isDisabled={!isPersonalInfoValid || !isSkillsValid}
+            _selected={{ color: 'white', bg: 'imuko.mainBlue' }}>
             Experiencia e Intereses
           </Tab>
         </TabList>
@@ -113,7 +113,9 @@ const FormTabs = React.memo(() => {
       </Tabs>
       <Flex justifyContent={tabIndex < 1 ? 'flex-end' : 'space-between'} m={8}>
         <Button
-          variantColor="orange"
+          bg="imuko.mainBlue"
+          color="#fff"
+          _hover={{ bg: 'imuko.mainBlue', color: '#fff' }}
           display={tabIndex < 1 ? 'none' : 'block'}
           onClick={() => {
             window.scrollTo(0, 0);
@@ -123,14 +125,18 @@ const FormTabs = React.memo(() => {
         </Button>
         {tabIndex === 2 ? (
           <Button
-            variantColor="orange"
+            bg="imuko.mainBlue"
+            color="#fff"
+            _hover={{ bg: 'imuko.mainBlue', color: '#fff' }}
             disabled={!isExpValid}
             onClick={(event) => onSubmitHandler(event.target)}>
             Registrate
           </Button>
         ) : (
           <Button
-            variantColor="orange"
+            bg="imuko.mainBlue"
+            color="#fff"
+            _hover={{ bg: 'imuko.mainBlue', color: '#fff' }}
             onClick={() => {
               window.scrollTo(0, 0);
               setTabIndex((prevState) => prevState + 1);
