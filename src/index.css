@@ -10,6 +10,10 @@ html {
   --red-color: #e90101;
 }
 
+.header {
+  background: #F47405;
+}
+
 .radioBtnsGroup {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -32,4 +36,26 @@ html {
   font-size: 0.8rem;
   color: var(--red-color);
   font-style: italic;
+}
+
+.icon-container {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-container p, .icon-container a {
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+.social-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.social-container a {
+  margin: 5px;
+  font-size: 1.5rem;
+  cursor: pointer;
 }

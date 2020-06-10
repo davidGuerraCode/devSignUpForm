@@ -215,19 +215,19 @@ const Experience = ({ setFormState }) => {
           </Select>
         </Box>
 
-        <Box gridColumn={{ md: 'span 2' }}>
-          <FormLabel htmlFor="aboutExp">Hablanos de tu experiencia</FormLabel>
-          <Textarea
-            resize="none"
-            name="aboutExp"
-            id="aboutExp"
-            placeholder="Desarrollador web con mas de..."
-            onChange={(event) =>
-              onChangeFieldHandler(event.target.name, event.target.value)
-            }
-            bg="imuko.secondaryGray"
-          />
-        </Box>
+        {/*<Box gridColumn={{ md: 'span 2' }}>
+          *  <FormLabel htmlFor="aboutExp">Hablanos de tu experiencia</FormLabel>
+          *  <Textarea
+          *    resize="none"
+          *    name="aboutExp"
+          *    id="aboutExp"
+          *    placeholder="Desarrollador web con mas de..."
+          *    onChange={(event) =>
+          *      onChangeFieldHandler(event.target.name, event.target.value)
+          *    }
+          *    bg="imuko.secondaryGray"
+          *  />
+          *</Box>*/}
       </Grid>
     </FormControl>
   );

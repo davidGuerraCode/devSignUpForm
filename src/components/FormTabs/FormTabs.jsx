@@ -7,6 +7,8 @@ import {
   TabPanel,
   Button,
   Flex,
+  Heading,
+  Text,
 } from '@chakra-ui/core';
 import { PersonalInfo, Skills, Experience } from './Forms';
 
@@ -76,6 +78,17 @@ const FormTabs = React.memo(() => {
 
   return (
     <>
+      <Flex justify="center">
+        <Flex direction="column" align="center">
+          <Heading as="h1" textAlign="center">
+            Registrate como Desarrollador
+          </Heading>
+          <Text fontSize="md" textAlign="center" mt={5} fontWeight="bold">
+            Gracias por querer ser parte de la familia IMUKO, conociendo tus
+            preferencias, podremos elegir el mejor proyecto para ti.
+          </Text>
+        </Flex>
+      </Flex>
       <Tabs
         size="md"
         variant="enclosed"
