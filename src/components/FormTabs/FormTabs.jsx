@@ -99,12 +99,12 @@ const FormTabs = React.memo(() => {
             Información Personal
           </Tab>
           <Tab
-            // isDisabled={!isPersonalInfoValid}
+             isDisabled={!isPersonalInfoValid}
             _selected={{ color: 'white', bg: 'imuko.mainBlue' }}>
             Skills
           </Tab>
           <Tab
-            // isDisabled={!isPersonalInfoValid || !isSkillsValid}
+             isDisabled={!isPersonalInfoValid || !isSkillsValid}
             _selected={{ color: 'white', bg: 'imuko.mainBlue' }}>
             Experiencia e Intereses
           </Tab>
